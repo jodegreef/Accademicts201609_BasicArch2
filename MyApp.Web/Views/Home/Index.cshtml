@@ -1,0 +1,49 @@
+﻿@model MyApp.ApplicationServices.ViewModels.OverviewModel
+<h3>Lego sets</h3>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table-bordered table-striped table-condensed">
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Price</td>
+                    <td>Sold?</td>
+                    <td></td>
+                </tr>
+            </thead>
+            @foreach (var legoSet in Model.LegoSets)
+        {
+                <tr>
+                    <td>@legoSet.Name</td>
+                    <td>@legoSet.Price @legoSet.Currency</td>
+                <td>@legoSet.IsSold</td>
+                <td>@Html.ActionLink("Edit as draft", "NewDraft", new { id = @legoSet.Id })</td>
+            </tr>
+            }
+        </table>
+        @Html.ActionLink("Create new draft", "NewDraft")
+    </div>
+</div>
+
+<h3>Drafts</h3>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table-bordered table-striped table-condensed">
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </thead>
+            @foreach (var legoSet in Model.Drafts)
+            {
+                <tr>
+                    <td>@legoSet.Name</td>
+                    <td>@Html.ActionLink("Edit", "DraftDetail", new { id = @legoSet.Id })</td>
+                    <td>@Html.ActionLink("Publish", "Publish", new { id = @legoSet.Id })</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
